@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions for Round 11
+{% endblock %}
+
+{% block content %}
+  <div class="base d-flex justify-content-center">
+    <div>
+      <ul>
+        <li>Your decision sheet shows ten decisions listed on the left. Each decision is a paired choice between "Option A" and "Option B." </li>
+        <li>You will make ten choices and record these in the final column, but only one of them will be randomly chosen by the computer in the end to determine your earnings. </li>
+        <li>Even though you will make ten decisions, only one of these will end up affecting your earnings for Round 11, but you will not know in advance which decision will be used. Obviously, each decision has an equal chance of being used in the end. </li>
+        <li>Now, please look at Decision 1 at the top. Option A pays 200M with 10% chance, and it pays 160M with 90% chance. Option B yields 385M with 10% chance, and it pays 10M 90% chance. The computer program will determine the chances and calculate accordingly.</li>
+        <li>The other Decisions are similar, except that as you move down the table, the chances of the higher payoff for each option increase. In fact, for Decision 10 in the bottom row, the random decision will not be needed since each option pays the highest payoff for sure, so your choice here is between 200M or 385M.</li>
+        <li>So now please look at the empty boxes on the right side of the record sheet. You will have to record your decision between A or B in each of these boxes.
+      </ul>
+    </div>
+  </div>
+    {% next_button %}
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}

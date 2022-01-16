@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+  {% if yes %}
+    Please note
+  {% else %}
+    Please Begin
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="base d-flex justify-content-center">
+    <div>
+      <p class="cen">The decision round {{player.round_number}} will now begin.<br>Remember the following:</p>
+      <ol>
+        <li>There are ten rounds of decision making.</li>
+        <li>The time limit for each round will be randomly picked from 45sec and 90sec. </li>
+        <li>In each of the following rounds you are randomly matched with two other people in this room.</li>
+        <li>You are never matched with the same person in two consecutive rounds.</li>
+        <li>Make sure the audio is switched on.</li>
+      </ol>
+    </div>
+  </div>
+  {% next_button %}
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}

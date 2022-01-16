@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round 11 Results
+{% endblock %}
+
+{% block content %}
+<div class="base d-flex justify-content-center">
+<div class="left">
+<p>
+  Out of the ten choices you made the randomly chosen choice is  choice {{ Round }}<br>
+  You had chosen{% if Decision %} Option A.
+  {% else %} Option B.
+  {% endif %}<br>
+  Now the computer will choose {{small}}M with {{chance}}% chance and {{big}}M with {{chance2}}% chance.<br>
+  You have won {{Payoff}} M because {{Payoff}} M was randomly chosen by the computer.<br>
+  Your earning for Round 11 is {{Payoff}} M.<br>
+  <span class="imp">We have come to the end of the experiment. Please fill out a short survey in the following pages.<br> You will be shown your earnings after that. </span>
+  </p>
+</div>
+</div>
+<div id="okbutton">
+
+<button class="btn btn-danger" style="margin-left: auto; display: block;" onclick="byebutton()"> Continue </button>
+
+    </div>
+
+
+{% endblock %}

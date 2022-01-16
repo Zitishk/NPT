@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Informed Consent
+{% endblock %}
+
+{% block content %}
+  <div class="otree-form-errors alert alert-danger">
+    {{ form.consent.errors.0 }}
+  </div>
+  <div class="base d-flex justify-content-center">
+    <div>
+      <p class="cen">Please read the following text carefully.</p>
+      <h3>Procedure</h3>
+      <p>Participants will have to make an incentivized choice in 11 rounds of an economic experiment. Depending on the choices they make they will be paid money. Then they will be asked to write a short survey. The total time to complete the session will be about 1.5 hours.</p>
+      <h3>Risks</h3>
+      <p>There are no risks of participation in the study. The participants may discontinue the research participation at any time during the study without any penalty.</p>
+      <h3>Benefits</h3>
+      <p>Participation in this study is voluntary and they will be paid a small sum of money for participating in the experiment. Paying money for choices made in an experiment is an internationally accepted convention in Economics.  Participants are free to leave the session at any point during the study.</p>
+      <h3>Right to Information</h3>
+      <p>Participants are free to ask any questions during/after the data collection process.</p>
+      <h3>Confidentiality and Privacy</h3>
+      <p>Privacy and Confidentiality will be maintained. The responses will be anonymized using a subject code for each participant. Only de-identified data will be shared for analysis by the researchers.</p>
+    <input class="form-check-input" type="checkbox" value="True" name="consent">
+    <label class="form-check-label imp">
+    I have understood what has been explained to me regarding the procedure and purpose of the research.
+    I have understood my rights and offer my participation through a complete voluntary consent.
+    </label>
+    <p>For further information, you can contact the following<br>
+       Researcher's Name: 	Ritwik Banerjee (IIM Bangalore)<br>
+       Email ID : ritwikbanerjee@iimb.ac.in<br>
+       Phone Number : +919868733938</p>
+    </div>
+  </div>
+  <div>
+  {% next_button %}
+  </div>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}
+{% block scripts %}
+  <script>
+      document.getElementsByClassName("alert")[0].style.display = "none";
+  </script>
+{%endblock%}

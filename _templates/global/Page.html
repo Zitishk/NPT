@@ -1,0 +1,30 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block global_styles  %}
+
+<style type="text/css">
+
+.otree-title{
+text-align: center;
+}
+
+.otree-body{
+    text-align: center;
+    }
+
+div.left{
+  text-align:left;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block global_scripts  %}
+<script>
+    function byebutton() {
+        document.getElementById("okbutton").style.display = "none" ;
+    }
+</script>
+{% endblock %}

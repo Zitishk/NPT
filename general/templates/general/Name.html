@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Choose Your Name
+{% endblock %}
+
+{% block content %}
+  <div class="otree-form-errors alert alert-danger">
+    {{ form.name.errors}}
+    {{ form.non_field_errors }}
+  </div>
+  <div class="base d-flex flex-column align-items-center">
+      <div class="p-2">
+        As a first step, please choose a name for yourself from the list provided below.
+        <span class="imp">This is an anonymous experiment.</span>
+        As a result, all future references to another participant will be in terms of the chosen name.
+        <span class="imp">You will retain that name throughout the experiment. No two people can choose the same name.</span>
+        Suppose two people choose the same name, the first one to click ‘submit’ will be allowed to retain the name.
+        The other person has to choose again.
+      </div>
+      <div class="p-2">
+      <table class="table">
+          <tr>
+            <td>{{ form.name.0 }}</td>
+            <td>{{ form.name.5 }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.name.1 }}</td>
+            <td>{{ form.name.6 }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.name.2 }}</td>
+            <td>{{ form.name.7 }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.name.3 }}</td>
+            <td>{{ form.name.8 }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.name.4 }}</td>
+            <td>{{ form.name.9 }}</td>
+          </tr>
+      </table>
+      </div>
+      {% next_button %}
+</div>
+
+{% endblock %}
+{% block styles %}
+  <link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}
+{% block scripts %}
+  <script>
+      document.getElementsByClassName("alert")[0].style.display = "none";
+  </script>
+{%endblock%}

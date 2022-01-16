@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+<div class="base d-flex justify-content-center">
+<div class="left">
+<p> Your payment will be based on the results of Round {{ round }}. <br>
+  In Round {{ round }} your decision was to {% if decision %} Invest.
+  {% else %} Not Invest {% endif %}<br>
+  {{ name }} in your group invested in the round.<br>
+  Your earnings from the round is {{ earnings }} M<br>
+  Your earnings from Round 11 were {{ Payoff }} M<br>
+  So your total earnings are {{ final }} M.<br>
+
+</div>
+</div>
+<div id="okbutton">
+
+<button class="btn btn-danger" style="margin-left: auto; display: block;" onclick="byebutton()"> Continue </button>
+
+    </div>
+
+
+{% endblock %}

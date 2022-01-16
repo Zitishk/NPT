@@ -1,0 +1,85 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %} Welcome! {% endblock %}
+
+{% block content %}
+<h3>Speed Test</h3>
+
+<p>
+    This study requires a minimum internet connection.
+    To check your internet speed,
+    please open the following <a href="https://www.speedtest.net/" target="_blank">LINK</a> and click 'GO'.
+    Once the speed test is completed, please enter the results from the speed test.
+</p>
+
+    <table>
+    <tr>
+        <td>Ping (in ms):</td>
+        <td>{{ form.ping }}</td>
+    </tr>
+    <tr>
+        <td>Download (in Mbps):</td>
+        <td>{{ form.download }}</td>
+    </tr>
+    <tr>
+        <td>Upload (in Mbps):</td>
+        <td>{{ form.upload }}</td>
+    </tr>
+    </table>
+
+    {{ form.ping.errors }} {{ form.download.errors }} {{ form.upload.errors }}
+
+
+
+<button class="btn btn-danger" style="margin-left: auto; display: block;" id="button1"> Continue </button>
+
+
+{% endblock %}
+
+{% block styles %}
+
+<style type="text/css">
+
+table {
+    border-collapse: collapse;
+    text-align:center;
+    width: 500px;
+    height:40px;
+    margin: auto;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+    margin: 0;
+}
+
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+    $('#button1').click(function () {
+        var flag = 0;
+        var result = new Array();
+
+        $(':input[type=number]').each(function(){
+            var input = $(this);
+            if(input.val() > 0 && input.val() !== ''){
+                result.push(input.val());
+            }
+        });
+
+        if(result.length === 3){
+            console.log("in the if")
+            document.getElementById("button1").style.display = "none" ;
+        }
+            });
+
+    </script>
+
+{% endblock %}

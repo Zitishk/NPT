@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Quiz
+{% endblock %}
+
+{% block content %}
+
+  <div class="base d-flex justify-content-center">
+    <div>
+    {% formfields %}
+    {% next_button %}
+    </div>
+  </div>
+
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}
+{% block scripts %}
+  <script>
+      document.getElementsByClassName("alert")[0].style.display = "none";
+  </script>
+{%endblock%}

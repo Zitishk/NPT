@@ -1,0 +1,77 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome!
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    Thank you for your participation!
+    Before we begin today's session, we must confirm that everyone's JavaScript is working.
+    Please type the numbers in the box below into the space provided and press the "Next" button.
+    </p>
+
+    <table>
+    <tr>
+        <td>
+            <table class="border" id="matrix"></table></td>
+        <td>
+            <input name="javaTest" type="number" style="width: 5em">
+        </td>
+    </tr>
+    </table>
+
+    {{ form.javaTest.errors }}
+
+<button class="btn btn-danger" style="margin-left: auto; display: block;" id="button1"> Continue </button>
+
+    <p>
+    If you <b>cannot</b> see what is written above, please send a private chat message to Researcher 1 over Zoom.
+    Thank you for your continued patience!
+    </p>
+
+
+
+{% endblock %}
+
+
+{% block styles %}
+
+ <style type="text/css">
+
+table {
+    border-collapse: collapse;
+    text-align:center;
+    width: 100px;
+    height:40px;
+    margin: auto;
+}
+
+.border, .border tr, .border th, .border td {
+  border: 1px solid black;
+}
+
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        liveSend({'pageLoad': true});
+    });
+
+    let matrix = document.getElementById('matrix');
+
+    function liveRecv(payload) {
+        matrix.innerHTML = '<tr><td><b>' + payload.secret + '</b></td></tr>';
+    };
+
+
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Audio Check
+{% endblock %}
+
+{% block content %}
+<div id='browser' style="display:none" class="imp">
+  <p>
+    Your browser is not comptible with the experiment. Please switch your browser to continue.
+    <span class="output-safari"></span>
+    <span class="output"></span>
+</p>
+</div>
+<div class="base d-flex justify-content-center">
+  <div id='audio'>
+  <p>
+    Please make sure that the audio of your computer is <span class="imp">switched on</span> and you are able to hear things loud and clear.<br>
+    <span class="imp">The audio should be kept switched on throughout the experiment.</span><br>
+    Please click play on the audio clip below and write down the word that is being pronounced.
+  </p>
+  <div class="cen">
+    <audio controls loop id='aud'>
+      <source src={% static 'global/cat.mp3' %} type="audio/mp3">
+      <source src={% static 'global/cat.m4a' %} type="audio/m4a">
+    </audio>
+    <div class="cent">
+    {% formfield player.audio %}
+    {% next_button %}
+    </div>
+  </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+  <script>
+    function checkBrowser() {
+      let userAgentString =  navigator.userAgent;
+      let chromeAgent = userAgentString.indexOf("Chrome") > -1;
+      let safariAgent = userAgentString.indexOf("Safari") > -1;
+      if ((chromeAgent) && (safariAgent)) safariAgent = false;
+      if (safariAgent) document.getElementById("browser").style.display = "block";
+      if (safariAgent) document.getElementById("audio").style.display = "none";
+      }
+    checkBrowser()
+  </script>
+    <script>
+        document.getElementsByClassName("alert")[0].style.display = "none";
+    </script>
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}

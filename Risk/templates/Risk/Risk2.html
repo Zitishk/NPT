@@ -1,0 +1,123 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round 11
+{% endblock %}
+
+{% block content %}
+<div class="otree-form-errors alert alert-danger">
+  {{ form.Risk4.errors }}
+</div>
+  <div class="base d-flex flex-column align-items-center">
+    <div>
+    <button type="button" class="collapsible">Instructions</button>
+    <div class="content">
+      <ul>
+        <li>Your decision sheet shows ten decisions listed on the left. Each decision is a paired choice between "Option A" and "Option B." </li>
+        <li>You will make ten choices and record these in the final column, but only one of them will be randomly chosen by the computer in the end to determine your earnings. </li>
+        <li>Even though you will make ten decisions, only one of these will end up affecting your earnings for Round 11, but you will not know in advance which decision will be used. Obviously, each decision has an equal chance of being used in the end. </li>
+        <li>Now, please look at Decision 1 at the top. Option A pays 200M with 10% chance, and it pays 160M with 90% chance. Option B yields 385M with 10% chance, and it pays 10M 90% chance. The computer program will determine the chances and calculate accordingly.</li>
+        <li>The other Decisions are similar, except that as you move down the table, the chances of the higher payoff for each option increase. In fact, for Decision 10 in the bottom row, the random decision will not be needed since each option pays the highest payoff for sure, so your choice here is between 200M or 385M.</li>
+        <li>So now please look at the empty boxes on the right side of the record sheet. You will have to record your decision between A or B in each of these boxes.
+      </ul>
+    </div>
+    </div>
+    <br>
+    <br>
+    <div>
+      <table class="table table-bordered table-sm" id="myTable">
+        <thead>
+        <tr>
+          <th>Decision</th>
+          <th>Option A</th>
+          <th>Option B</th>
+          <th>Which option do you choose</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% next_button %}
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+<style>
+  .collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+</style>
+{% endblock %}
+{% block scripts %}
+    <script>
+      var table = document.getElementById("myTable");
+      var i = 1;
+      var j = 9;
+      {% for field in form %}
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = `${i}`;
+        cell2.innerHTML = `With ${i}/10 probability: 200M <br> With ${j}/10 probability: 160M`;
+        cell3.innerHTML = `With ${i}/10 probability: 385M <br> With ${j}/10 probability: 10M`;
+        cell4.innerHTML = `<ul id="id_Risk${i}"><li><label for="id_Risk${i}_0"><input type="radio" name="Risk${i}" value="1" required id="id_Risk${i}_0" class="form-check-input">Option A</label></li><li><label for="id_Risk${i}_1"><input type="radio" name="Risk${i}" value="0" required id="id_Risk${i}_1" class="form-check-input">Option B</label></li></ul>`;
+        i = i + 1;
+        j = j - 1;
+      {% endfor %}
+    </script>
+    <script>
+        document.getElementsByClassName("alert")[0].style.display = "none";
+    </script>
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
+        });
+      }
+    </script>
+{% endblock %}

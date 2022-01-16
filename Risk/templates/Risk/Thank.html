@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Thank You!
+{% endblock %}
+
+{% block content %}
+<div class="base d-flex justify-content-center">
+<div>
+  <ul>
+  <li>We have come to the end of the survey.
+  <li>Your total earning from the experiment is {{ final }}M i.e. Rs. {{money}}. We will pay you this amount shortly. 
+  <li>Thank you once again for your time.
+  </ul>
+</div>
+</div>
+<div id="okbutton">
+
+<button class="btn btn-danger" style="margin-left: auto; display: block;" onclick="byebutton()"> Continue </button>
+
+    </div>
+
+
+{% endblock %}

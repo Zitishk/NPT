@@ -1,0 +1,116 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round Results
+{% endblock %}
+
+{% block content %}
+  <div id="appear">
+    <p style="color:#ff0000">Please Click the "Continue" button once you have
+                            finished reviewing your results.</p>
+  </div>
+
+  <div class="left">
+    <p>Round: {{player.round_number}} </p>
+  </div>
+  <div class="Content">
+    <div>
+    {% if mode != 3 %}
+      <span class="imp">{{ name }}</span> from your group invested in Round {{player.round_number}}.<br>
+    {% endif %}
+    {% if mode == 3 or mode == 4%}
+      {% if group %}
+        <span class="imp">{{ name1}}</span> and <span class="imp">{{ name2 }}</span> of your group did not invest in Round {{player.round_number}}.
+      {% else %}
+        <span class="imp">No one</span> from your group invested in Round {{player.round_number}}.<br>
+      {% endif %}
+    {% endif %}
+    </div>
+    <div>
+    <p>
+      Your decision was to {% if invest %} <span class="imp">Invest</span>
+      {% else %} <span class="imp">Not Invest</span> {% endif %}<br>
+      Your Earnings in this round : <span class="imp">{{earning}} M</span><br>
+    </p>
+    </div>
+    <div id='image1'>
+      {% if mode == 2 or mode == 4 %}
+        {% if group %}
+          <p>
+            Congratulations {{ name }} for investing in this Round. Please join me
+            in congratulating {{ name }} for making this investment!!
+          </p>
+          <div>
+            <img src= {% static 'global/SMILEY.png' %} width="200" height="200">
+          </div>
+          {% endif %}
+        {% endif %}
+        {% if mode == 2 %}
+          <div>
+            <audio id='aud'>
+              <source src={% static 'global/applause.mpeg' %} type="audio/mpeg">
+              <source src={% static 'global/applause.m4a' %} type="audio/m4a">
+            </audio>
+          </div>
+        {% endif %}
+        <br>
+        <br>
+      {% if mode == 3 or mode == 4 %}
+        {% if group %}
+        <div>
+          It is unforutunate that <span class="imp">{{ name1 }}</span> and
+          <span class="imp">{{ name2 }}</span> of your group did not invest in the group account.
+        </div>
+        <br>
+        <div>
+          <img src= {% static 'global/SAD.png' %} width="200" height="200">
+        </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div id="okbutton">
+    <button class="btn btn-danger" style="margin-left: auto; display: block;" onclick="byebutton()"> Continue </button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    {% if group %}
+    setTimeout(function (){
+      document.getElementById('aud').play();},7000);
+    {% endif %}
+    function hide(idel) {
+      document.getElementById(idel).style.display = "none";}
+
+    hide("appear")
+    hide("image1")
+    {% if mode != 1 %}
+      {% if group %}
+      hide("okbutton")
+      {% endif %}
+    {% endif %}
+  </script>
+
+  <script>
+    setTimeout(function (){
+      document.getElementById("appear").style.display="block";},60000);
+    {% if mode != 1 and group %}
+      setTimeout(function (){
+        document.getElementById("okbutton").style.display="block";},19000);
+      setTimeout(function (){
+        document.getElementById("image1").style.display="block";
+        document.getElementById("image2").style.display="block";
+
+      },7000);
+    {% endif %}
+  </script>
+  <script>
+      document.getElementsByClassName("alert")[0].style.display = "none";
+  </script>
+{% endblock %}
+{% block styles %}
+  <link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}

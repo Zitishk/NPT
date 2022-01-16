@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block content %}
+<div class="base d-flex justify-content-center">
+<ul>
+  <li>Welcome to an experiment on decision making!</li>
+  <li>Thank you for participating in our study. This is an experiment about
+      economic decision making. The other people in this room are also
+      participating in the experiment. </li>
+  <li>You are free to leave the experiment at any time. However, if you choose
+      to leave the experiment, you will have to forego your earnings.</li>
+  <li>All decisions have to be private taken. You must not talk to the others
+      or communicate with them in any way.</li>
+  <li>If you have a question, please raise your hand and one of us will come
+      to where you are sitting to answer it.</li>
+</ul>
+</div>
+{% next_button %}
+
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}

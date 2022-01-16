@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Earnings
+{% endblock %}
+
+{% block content %}
+<div class="base d-flex justify-content-center">
+    <ul>
+      <li>For participating in the study today, you will earn at least <span class="imp">Rs. 50.</span>
+          This is your participation fee for today.
+      </li>
+      <li>During the experiment, you will earn in terms of our laboratory currency
+          called “Mohor” or M (meaning gold coins in ancient India). All Mohors
+          you earn in the experiment will be converted into Rupees at the end of
+          the experiment.
+      </li>
+      <li>The conversion rate is: <span class="imp">1 Mohor = Rs. 0.20</span>.
+      </li>
+      <li>The experiment will consist of <span class="imp">eleven rounds</span>. You will be paid for one
+          <span class="imp>"randomly chosen round between Round 1 and 10</span> in addition to your earning
+          from <span class="imp">Round 11</span>.
+      </li>
+      <li>But you do not know which round you will be paid for, so play all the rounds
+          carefully.
+      </li>
+    </ul>
+  </div>
+  {% next_button %}
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}
+{% block scripts %}
+  <script>
+      document.getElementsByClassName("alert")[0].style.display = "none";
+  </script>
+{%endblock%}

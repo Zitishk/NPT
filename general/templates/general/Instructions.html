@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+  Decision Stage Instructions
+{% endblock %}
+
+{% block content %}
+  <div class="base d-flex justify-content-center">
+    <ul>
+      <li>In each round, you and the two other group members will have an opportunity to <b>invest</b> in a group account. </li>
+      <li>You and your group members will have a time limit between <b>45- 90</b> seconds to individually decide whether you want to invest in the group account. </li>
+      <li>You will not get to know in advance the exact time limit you have for making the investment. For example, Group 1 may have a time limit of 48 seconds but Group 2 may have a time limit of 78 seconds.</li>
+      <li>A sound clip (counting seconds in intervals of 5) will be played to help you understand how much time has passed.</li>
+      <li>The round ends and the decision screen <b>disappears</b> as soon as you or a member of your group invests in the group account or when the stipulated seconds are up.</li>
+      <li>Whichever group member invests first from the group, he/she will be will earn <b>300M</b> while the other two group members will earn <b>900M</b> in the first stage. </li>
+      <li>If no investment is made by anyone in the group account within timeout, all three members of the group will earn <b>100M</b> for the first stage.</li>
+      <li>If two group members simultaneously decide to invest, then it is <b>randomly</b> determined who earns 300M and 900M in the first stage.</li>
+      {% if mode == 1 %}
+      <li>At the end of the round, the <b>Chosen name</b> of the investor will be displayed on all three group members’ screens. </li>
+      {% elif mode == 2 %}
+      <li>At the end of the round, the <b>Real name</b> of the investor will be displayed on all three group members’ screens. </li>
+      {% elif mode == 3 %}
+      <li>At the end of the round, the <b>Real names</b> of the two non-investors will be displayed on all three group members’ screens. </li>
+      {% else %}
+      <li>At the end of the round, the <b>Real names</b> of the investor and two non-investor will be displayed on all three group members’ screens. </li>
+      {% endif %}
+    </ul>
+  </div>
+  {% next_button %}
+
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}
+{% block scripts %}
+  <script>
+      document.getElementsByClassName("alert")[0].style.display = "none";
+  </script>
+{%endblock%}

@@ -1,0 +1,24 @@
+.base{
+  text-align: justify;
+  margin: 20px 40px;
+}
+.cen{
+  text-align: center;
+}
+.imp{
+  font-weight: bold;
+}
+.cent{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.table td{
+  padding: 15px;
+}
+
+ul.errorlist{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

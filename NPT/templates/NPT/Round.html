@@ -1,0 +1,196 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Decision Stage
+{% endblock %}
+
+
+{% block content %}
+
+<div id="unhide">
+    <p>
+        Round {{player.round_number}} will begin momentarily.
+    </p>
+</div>
+
+<div id="after">
+    <p>
+        An investment has happened. Please wait.
+    </p>
+</div>
+
+<div id="end">
+    <p>
+        Time is up. Please wait.
+    </p>
+</div>
+
+<div id="hide">
+  <div class="btn btn-info">
+    <p id="demo"></p>
+  </div>
+
+    <div class="left">
+<p>Round: {{player.round_number}} </p>
+</div>
+<div class="base d-flex justify-content-center">
+  <ul>
+    <li>The red button in the centre of the screen is used to make your investment decision.</li>
+    <li>The round ends and the decision screen disappears as soon as you or a member of your group invests in the group account.</li>
+    <li>Please click this button if you wish to invest.</li>
+  </ul>
+</div>
+
+<p></p><p></p>
+
+<button onclick="leavePage()" class="btn btn-danger" type="button">
+    Invest
+</button>
+
+    <input type="hidden" name="javaTime" value="" id="id_javaTime" />
+
+{{ form.javaTime.errors }}
+
+        <input type="hidden" name="pressTime" value="" id="id_pressTime" />
+
+{{ form.pressTime.errors }}
+
+	<div id="button1">
+        <button id="next_button">next</button>
+	</div>
+
+<br><br><br><br>
+
+    <p><small>
+        You have been randomly paired with two participants.
+        If no member of the group invests, then you will each make {{novolunteer}} M.
+        If a member of your group invests then that member will make {{volunteer}} M, and the other group members will each make {{other_volunteer}} M.
+    </small></p>
+    </div>
+
+
+{% endblock %}
+
+
+{% block styles %}
+
+<style type="text/css">
+
+    .otree-timer {
+        display: none;
+        text-align: center;
+        color: black;
+        padding: 1px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: black;
+    }
+</style>
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    var pressTime, endTime, startTime;
+
+    function leavePage() {
+        liveSend(1)
+        document.getElementById("hide").style.display = "none";
+        document.getElementById("after").style.display = "block";
+        pressTime = performance.now();
+        var press = pressTime - startTime;
+        press /= 1000;
+        document.getElementById("id_pressTime").value = press;
+        console.log('pressed', pressTime, press);
+    }
+
+    function liveRecv(data) {
+    console.log('received', data);
+    let type = data.type
+    if (type === 'round_finished'){
+        document.getElementById("hide").style.display = "none";
+        document.getElementById("after").style.display = "block";
+        endTime = performance.now();
+        var diffTime = endTime - startTime;
+        diffTime /= 1000;
+        console.log('time', diffTime);
+
+        document.getElementById("id_javaTime").value = diffTime;
+
+        document.getElementById('next_button').click();
+        }
+    }
+
+    function hide() {
+		document.getElementById("button1").style.display = "none";
+	}
+
+	hide()
+
+</script>
+
+<script>
+
+    $(".otree-timer").insertAfter($(".left"));
+
+</script>
+
+<script>
+    $(function () {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+                var format = '%T';
+                $(this).html(event.strftime(format));
+            })
+    });
+</script>
+
+<script>
+    function hide3() {
+		document.getElementById("hide").style.display = "none";
+		document.getElementById("after").style.display = "none";
+		document.getElementById("end").style.display = "none";
+	}
+
+	function hide2() {
+		document.getElementById("unhide").style.display = "none";
+	}
+
+	hide3()
+
+	var timePeriodInMs = {{minTime|json}};
+
+	setTimeout(function()
+		{
+		document.getElementById("hide").style.display = "block";
+		hide2();
+		startTime = performance.now();
+		console.log('start',startTime);
+		},
+	timePeriodInMs);
+
+</script>
+
+<script>
+    var time_of_page = {{ time }} * 1000;
+    console.log('time',time_of_page);
+    setTimeout(function()
+        {
+        document.getElementById("hide").style.display = "none";
+        document.getElementById("end").style.display = "block";
+        },
+        time_of_page);
+</script>
+<script>
+    var seconds = 0;
+    var x = setInterval(function() {
+        seconds = seconds + 1;
+        document.getElementById("demo").innerHTML = "Time elapsed " +seconds + "secs";
+    }, 1000);
+</script>
+<script>
+    document.getElementsByClassName("alert")[0].style.display = "none";
+</script>
+{% endblock %}

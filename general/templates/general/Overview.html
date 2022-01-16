@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Overview
+{% endblock %}
+
+{% block content %}
+  <div class="base d-flex justify-content-center">
+    <ul>
+      <li>Here is a description of one of the first ten rounds. </li>
+      <li>In each round you are randomly paired with two other participants to form a group. <span class="imp">You will never be paired with the same participant twice in a row.</span> </li>
+      <li>The group remains the same through the round, but changes every round. </li>
+      <li>Your earning in a given round depends on the decisions made by you and by your group members. </li>
+      <li>Remember, you will be randomly paid for a round between Round 1 and 10. </li>
+      <li>At the end of the experiment you will be paid, in private and in cash.</li>
+    </ul>
+  </div>
+  {% next_button %}
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href= {% static 'global/styling.css' %} >
+{% endblock %}

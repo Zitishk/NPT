@@ -1,0 +1,67 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %} Welcome! {% endblock %}
+
+{% block content %}
+<h3>Full Attention Pledge</h3>
+
+<p>
+Thank you for your help with our research.
+It is important that all participants are able to fully complete the study and are willing to devote their full attention to it.
+     </p>
+
+During the full session, I pledge to:
+
+    <div class="holder">
+
+{% formfield player.pledge1 %}
+{% formfield player.pledge2 %}
+{% formfield player.pledge3 %}
+    {% formfield player.pledge4 %}
+    </div>
+
+    <br>
+
+    Please confirm:
+
+    <div class="holder">
+    {% formfield player.pledge5 %}
+    </div>
+
+    <br>
+
+
+<button class="btn btn-danger" style="margin-left: auto; display: block;" id="button1"> Continue </button>
+
+
+{% endblock %}
+
+
+{% block styles %}
+
+<style type="text/css">
+
+div.holder{
+    margin: auto;
+    width: 70%;
+    text-align: left;
+    border-style: hidden;
+}
+
+
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+
+    $('#button1').click(function () {
+        if($(':checkbox:not(:checked)').length === 0){
+                console.log("in the if")
+                document.getElementById("button1").style.display = "none" ;
+            }
+            });
+    </script>
+{% endblock %}
